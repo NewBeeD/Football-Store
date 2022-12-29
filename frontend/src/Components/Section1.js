@@ -19,7 +19,7 @@ const FirstSection = () => {
 
       count += 1;
 
-    }, 3000)
+    }, 3500)
 
     return ()=> clearInterval(interval)
   }, [])

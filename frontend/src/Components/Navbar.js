@@ -41,10 +41,10 @@ const NavBar = () => {
 
           <div>
               <ul className='flex flex-col mt-8 space-y-4'>
-                <li className='md:my-0'>FOOTWEAR</li>
-                <li className='md:my-0'>APPAREL</li>
-                <li className='md:my-0'>EQUIPMENT</li>
-                <li className='md:my-0'>SALE</li>
+                <li className='md:my-0 md:hover:text-white'>FOOTWEAR</li>
+                <li className='md:my-0 md:hover:text-white'>APPAREL</li>
+                <li className='md:my-0 md:hover:text-white'>EQUIPMENT</li>
+                <li className='md:my-0 md:hover:text-white'>SALE</li>
               </ul>
           </div>
 

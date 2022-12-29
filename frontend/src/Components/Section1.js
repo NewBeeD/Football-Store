@@ -4,33 +4,27 @@ import { MdSportsSoccer } from "react-icons/md";
 const FirstSection = () => {
 
   const images = ['bg-img1', 'bg-img2', 'bg-img3', 'bg-img4', 'bg-img5'];
-  const counter = 0;
+  let count = 0;
+  const [img, setImage] = useState('bg-img1')
 
-  const [img, setImage] = useState(images[0])
+  useEffect(()=>{
 
-  const imgChange = ()=>{
+    const interval = setInterval(()=>{
 
-    if(counter < 5){setImage(images[counter])}
-    else{
-      counter = 0;
-      setImage(images[counter])
-    }
-    counter += 1;
-  }
+      if(count > 4){count = 0};
 
-  // useEffect(()=>{
+      let image = images[count]
 
-  //   setInterval(imgChange, 2000)
+      setImage(image)
 
-  //   return () => clearInterval(imgChange)
-  // }, [])
+      count += 1;
 
-  // setInterval()
+    }, 3000)
+
+    return ()=> clearInterval(interval)
+  }, [])
 
 
-
-  
-// 
 
   return ( 
 
@@ -47,12 +41,12 @@ const FirstSection = () => {
           </div>
 
           <div className="md:mt-48 mt-36">
-            <ul className="flex flex-row space-x-5">
-              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer hover:scale-125 duration-300"/></li>
-              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer hover:scale-125 duration-300"/></li>
-              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer hover:scale-125 duration-300"/></li>
-              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer hover:scale-125 duration-300"/></li>
-              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer hover:scale-125 duration-300"/></li>
+            <ul className="flex flex-row space-x-5 ">
+              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer  hover:scale-125 duration-300"/></li>
+              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer  hover:scale-125 duration-300"/></li>
+              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer  hover:scale-125 duration-300"/></li>
+              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer  hover:scale-125 duration-300"/></li>
+              <li><MdSportsSoccer className="h-5 w-5 text-prim5 cursor-pointer  hover:scale-125 duration-300"/></li>
             </ul>
           </div>
 

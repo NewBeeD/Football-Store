@@ -2,25 +2,37 @@ require('dotenv').config()
 
 
 const express = require('express')
-const mongo = require('mongoose')
+const mongoose = require('mongoose')
+const ecommRoutes = require('./Routes/ecommerceRoutes')
+const cors = require('cors')
+
+// access keys
 const port = process.env.PORT;
+const password = process.env.MONGO;
 
 // express app
 const app = express();
 
+
 app.use(express.json())
+app.use(cors())
 
 // Routes
-app.get('/', (req, res)=>{
+app.use('/api/football',ecommRoutes)
 
-  res.json({mssg: 'Hello World'})
+
+// Connect to db and server
+mongoose.set('strictQuery', false);
+mongoose.connect(password)
+.then(()=>{
+
+  // Listen for requests
+  app.listen(port, ()=>{
+    console.log(`Connected to Database and Listening on port: ${port}`);
+  })
 })
-
-
-// Listening for requests
-app.listen(port, ()=>{
-
-  console.log(`Listening on port: ${port}`);
+.catch((error) => {
+  console.log(error);
 })
 
 

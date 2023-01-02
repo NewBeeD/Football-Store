@@ -22,6 +22,10 @@ const ecommSchema = new Schema({
   },
   ground:{
     type: String,
+  },
+  path:{
+    type: String,
+    required: true
   }
 })
 

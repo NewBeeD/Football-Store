@@ -30,17 +30,16 @@ const getSingleInventory = async (req, res) => {
 // Add inventory
 const addInventory = async (req, res) => {
 
-  const {category, brand, name, price, type} = req.body
+  const {category, brand, name, price, type, path} = req.body
 
   try{
-    const schema = await ecommSchema.create({category, brand, name, price, type})
+    const schema = await ecommSchema.create({category, brand, name, price, type, path})
     res.status(200).json(schema)
   }
   catch(error){
     res.status(400).json({error: error.message})
   }
 }
-
 
 // update inventory
 

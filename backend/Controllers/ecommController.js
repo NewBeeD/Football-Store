@@ -42,15 +42,49 @@ const addInventory = async (req, res) => {
 }
 
 // update inventory
+const updateInventory = async (req, res) => {
 
+  const { id } = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error: 'No such Inventory'})
+  }
+
+  const inventory = await ecommSchema.findOneAndUpdate({_id: id}, {
+    ...req.body
+  })
+
+  if(!inventory){
+    return res.status(400).json({error: 'No Such Inventory'})
+  }
+  
+  res.status(200).json(inventory)
+}
 
 
 // Delete Inventory
+const deleteInventory = async (req, res) => {
 
+  const { id } = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error: 'No such Inventory'})
+  }
+
+  const inventory = await ecommSchema.findOneAndDelete({_id: id})
+
+  if(!inventory){
+    return res.status(400).json({error: 'No Such Inventory'})
+  }
+  
+  res.status(200).json(inventory)
+}
 
 
 module.exports = {
   addInventory,
   getSingleInventory,
-  getAllInventory
+  getAllInventory,
+  deleteInventory,
+  updateInventory
 }

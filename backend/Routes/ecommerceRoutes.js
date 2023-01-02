@@ -1,5 +1,5 @@
 
-const {addInventory, getSingleInventory, getAllInventory} = require('../Controllers/ecommController')
+const {addInventory, getSingleInventory, getAllInventory, deleteInventory, updateInventory} = require('../Controllers/ecommController')
 const express = require('express')
 const router = express.Router()
 
@@ -15,15 +15,10 @@ router.get('/:id', getSingleInventory)
 router.post('/', addInventory)
 
 // Delete single post
-router.delete('/:id', (req, res) => {
-  res.json({mssg: 'Delete Data'})
-})
+router.delete('/:id', deleteInventory)
 
 // Update single post
-router.patch('/:id', (req, res) => {
-  res.json({mssg: 'Update Data'})
-})
-
+router.patch('/:id', updateInventory)
 
 
 module.exports = router

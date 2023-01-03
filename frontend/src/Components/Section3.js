@@ -1,6 +1,6 @@
-import nike1 from '../images/Nike/nike1.png'
-import nike2 from '../images/Nike/nike2.png'
-import adidas1 from '../images/Adidas/adidas1.png'
+import nike1 from '../images/Nike/Nike1.png'
+import nike2 from '../images/Nike/Nike2.png'
+import adidas1 from '../images/Adidas/Adidas1.png'
 
 // const img1 = require('../images/Nike/nike1')
 

@@ -1,10 +1,11 @@
 import { useEffect, useState} from 'react'
-import nike1 from '../images/Nike/Nike1.png'
+
+import { NikeImage1 } from '../Assets/NikeImageImports'
+import { PumaImage1 } from '../Assets/PumaImageImports'
+import { AdidasImage1 } from '../Assets/AdidasImageImports'
 
 
 const Section3 = () => {
-
-
 
   const [inventory, setInventory] = useState(null)
 
@@ -17,7 +18,6 @@ const Section3 = () => {
     .catch(err => err.message)
 }
 
-    console.log(inventory);
   
   useEffect(() => {
 
@@ -25,7 +25,13 @@ const Section3 = () => {
 
   }, [])
 
- 
+  const checkImage = (path) => {
+    if(path.includes("Nike")) return NikeImage1;
+    else if (path.includes("Adidas")) return AdidasImage1;
+    else return PumaImage1;
+  }
+
+
 
 
   return ( 
@@ -35,23 +41,26 @@ const Section3 = () => {
 
       <div className="mt-8"><h1 className="text-4xl font-barlow font-bold">Popular products</h1></div>
 
+      <div className='flex flex-row justify-center space-x-12 border-2 border-red-900 '>
 
-      {inventory && inventory.filter(item => item.name === "PREDATOR EDGE 94+" || item.name === "Nike Phantom GT2 Elite" || item.name === "PUMA x BATMAN FUTURE").map(filteredItems => (
+        {inventory && inventory.filter(item => item.name === "PREDATOR EDGE 94+" || item.name === "Nike Phantom GT2 Elite" || item.name === "PUMA x BATMAN FUTURE").map(filteredItems => (
+          
+          <div className="mt-8 flex flex-row justify-center flex-wrap font-barlow font-semibold text-center md:space-x-8 w-24 sm:w-36 md:w-48">
+          
+            <div className="flex flex-col items-center border-2 shadow-xl hover:scale-110 duration-300 rounded-2xl h-auto text-center w-28 sm:w-56">
 
-        <div className="mt-8 flex flex-row justify-center flex-wrap font-barlow font-semibold h-auto text-center space-x-3 md:space-x-6">
+              <img src={checkImage(filteredItems.path)} alt="Cleats" className="rounded-2x md:w-[18rem] cursor-pointer w-24 sm:w-[24rem]"/>
 
-          <div className="flex flex-col items-center border-2 shadow-xl hover:scale-110 duration-300 rounded-2xl w-auto text-center">
-            <img src="" alt="Cleats" className="rounded-2x md:w-[18rem] cursor-pointer w-[6rem] "/>
-            <h2 className="text-sm w-24 md:text-base md:w-3/4">{ filteredItems.name }</h2>
-            <h3>{ filteredItems.price }</h3>
+              <h2 className="text-xs w-24 md:text-base md:w-3/4 sm:text-sm mt-2">{ filteredItems.name }</h2>
+              <h3 className='text-xs sm:text-sm'>{ filteredItems.price }</h3>
+            </div>
+
           </div>
 
-        </div>
- 
-      ))}
+        ))}
 
+      </div>
 
-          
     </div>
 
 

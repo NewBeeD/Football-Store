@@ -22,6 +22,8 @@ module.exports = {
         'img3': "url('https://images.pexels.com/photos/10923069/pexels-photo-10923069.jpeg')",
         'img4': "url('https://images.pexels.com/photos/10923062/pexels-photo-10923062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
         'img5': "url('https://images.pexels.com/photos/7271269/pexels-photo-7271269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+
+        
       },
     },
    

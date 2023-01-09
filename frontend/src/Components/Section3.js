@@ -41,7 +41,7 @@ const Section3 = () => {
 
       <div className="mt-8"><h1 className="text-4xl font-barlow font-bold">Popular products</h1></div>
 
-      <div className='flex flex-row justify-center space-x-12 border-2 border-red-900 '>
+      <div className='flex flex-row justify-center space-x-8'>
 
         {inventory && inventory.filter(item => item.name === "PREDATOR EDGE 94+" || item.name === "Nike Phantom GT2 Elite" || item.name === "PUMA x BATMAN FUTURE").map(filteredItems => (
           

@@ -11,8 +11,6 @@ const Section4 = () => {
   const [img, setImage] = useState(Players['img9'].img)
   const [brand, setBrand] = useState('Adidas')
 
-  console.log(counter.current);
-
 
   useEffect(()=>{
 

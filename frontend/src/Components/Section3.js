@@ -32,8 +32,6 @@ const Section3 = () => {
   }
 
 
-
-
   return ( 
 
     <div className="text-center">

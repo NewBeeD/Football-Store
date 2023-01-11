@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdSportsSoccer } from "react-icons/md";
+import img1 from '../images/SectionImages/landingpage.jpg'
 
 const FirstSection = () => {
 
@@ -30,7 +31,7 @@ const FirstSection = () => {
 
     <div>
 
-      <div className={`${'bg-img-1'} mt-[2.8rem] m-auto h-[35rem] w-[100vw] md:max-w-[80rem] md:h-[40rem] shadow-2xl bg-cover bg-center pb-40 text-center flex flex-col justify-center items-center pt-48 mb-5`}>
+      <div className={`mt-[2.8rem] m-auto h-[35rem] w-[100vw] md:max-w-[80rem] md:h-[40rem] shadow-2xl bg-cover bg-center pb-40 text-center flex flex-col justify-center items-center pt-48 mb-5 `} style={{backgroundImage: `url(${img1})`}}>
 
           <div className="mt-24 md:mt-48">
             <h1 className="text-prim5 text-4xl md:text-5xl font-extrabold w-64 md:w-96">Shop All Your Favorite Brands</h1>

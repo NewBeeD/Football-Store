@@ -41,9 +41,10 @@ const TeamJersies = () => {
 
         {inventory && inventory.filter(item => item.name.includes('Chelsea') || item.name.includes('Liverpool') || item.name.includes('Barcelona') || item.name.includes('Tottenham')).map(filteredItems => (
 
-          
+          <div key={filteredItems._id}>
 
-
+            <h1>{ filteredItems.name }</h1>
+          </div>
             
           ))}
 

@@ -5,6 +5,8 @@ import { BsSearch} from 'react-icons/bs';
 import { GrClose} from 'react-icons/gr';
 import { useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom'
+
 
 const NavBar = () => {
 
@@ -29,7 +31,7 @@ const NavBar = () => {
 
         <div className={`flex flex-row justify-between mt-2 items-center`}>
           <div>
-          <GiSoccerBall className='w-10 h-10 text-blue-900 cursor-pointer ml-2'/>
+          <Link to='/'><GiSoccerBall className='w-10 h-10 text-blue-900 cursor-pointer ml-2'/></Link>
           </div>
 
           <div>
@@ -41,10 +43,10 @@ const NavBar = () => {
 
           <div>
               <ul className='flex flex-col mt-8 space-y-4'>
-                <li className='md:my-0 md:hover:text-white'>FOOTWEAR</li>
-                <li className='md:my-0 md:hover:text-white'>APPAREL</li>
-                <li className='md:my-0 md:hover:text-white'>EQUIPMENT</li>
-                <li className='md:my-0 md:hover:text-white'>SALE</li>
+                <li className='md:my-0 md:hover:text-white cursor-pointer'><Link to='/footwear'>FOOTWEAR</Link></li>
+                <li className='md:my-0 md:hover:text-white'><Link to='/apparel'>APPAREL</Link></li>
+                <li className='md:my-0 md:hover:text-white cursor-pointer'><Link to='/equipment'>EQUIPMENT</Link></li>
+                <li className='md:my-0 md:hover:text-white cursor-pointer'><Link to='/sale'>SALE</Link></li>
               </ul>
           </div>
 
@@ -65,7 +67,7 @@ const NavBar = () => {
 
         
         <div className="logo">
-          <GiSoccerBall className='w-7 h-7 text-blue-900 cursor-pointer'/>
+        <Link to='/'><GiSoccerBall className='w-7 h-7 text-blue-900 cursor-pointer ml-2'/></Link>
         </div>
 
         <div className={`md:flex md:flex-row md:justify-between hidden`}>   
@@ -74,10 +76,10 @@ const NavBar = () => {
           <div>
 
             <ul className='md:flex md:items-center md:space-x-4 md:flex-row font-extrabold'>
-              <li className='my-2 md:my-0'>FOOTWEAR</li>
-              <li className='my-2 md:my-0'>APPAREL</li>
-              <li className='my-2 md:my-0'>EQUIPMENT</li>
-              <li className='my-2 md:my-0'>SALE</li>
+                <li className='md:my-0 md:hover:text-white cursor-pointer'><Link to='/footwear'>FOOTWEAR</Link></li>
+                <li className='md:my-0 md:hover:text-white'><Link to='/apparel'>APPAREL</Link></li>
+                <li className='md:my-0 md:hover:text-white cursor-pointer'><Link to='/equipment'>EQUIPMENT</Link></li>
+                <li className='md:my-0 md:hover:text-white cursor-pointer'><Link to='/sale'>SALE</Link></li>
             </ul>
           </div>
 

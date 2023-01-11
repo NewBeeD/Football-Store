@@ -16,7 +16,7 @@ const Home = () => {
       <Section1 />
       <Section2 />
       <Section3 />
-      <TeamJersies />
+      <TeamJersies/>
       <Section5 />
       <Section4 />
       <Footer />

@@ -1,13 +1,13 @@
 const PUMA = {
 
-  Puma1: require('./Puma1.png'),
-  Puma2: require('./Puma2.png'),
-  Puma3: require('./Puma3.png'),
-  Puma4: require('./Puma4.png'),
-  Puma5: require('./Puma5.png'),
-  Puma6: require('./Puma6.png'),
-  Puma7: require('./Puma7.png'),
-  Puma8: require('./Puma8.png')
+  puma1: require('./Puma1.png'),
+  puma2: require('./Puma2.png'),
+  puma3: require('./Puma3.png'),
+  puma4: require('./Puma4.png'),
+  puma5: require('./Puma5.png'),
+  puma6: require('./Puma6.png'),
+  puma7: require('./Puma7.png'),
+  puma8: require('./Puma8.png')
 }
 
 export default PUMA;

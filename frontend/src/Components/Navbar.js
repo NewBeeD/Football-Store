@@ -88,12 +88,14 @@ const NavBar = () => {
         <div className={`flex space-x-2`}>
             <ul className={`md:flex md:items-center md:space-x-2 hidden`}>
 
-              <li>SIGN-UP</li>
-              <li>LOG-IN</li>
+              <li className='cursor-pointer hover:text-white'><Link to='/signup'>SIGN UP</Link></li> 
+              <li className='cursor-pointer hover:text-white'><Link to='/login'>LOG-IN</Link></li>
             </ul>
 
             <div className={`flex space-x-7 justify-center items-center`}>
-              <AiOutlineShoppingCart className={`h-6 w-6 text-blue-900`}/>
+
+              <Link to='/cart' className='cursor-pointer'><AiOutlineShoppingCart className={`h-6 w-6 text-blue-900`}/></Link>
+              
 
               <BsSearch className='md:hidden h-5 w-5 text-blue-900'/>
 

@@ -3,7 +3,10 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+// Routes
 const ecommRoutes = require('./Routes/ecommerceRoutes')
+const shoppingCartRoutes = require('./Routes/shoppingCartRoutes')
+// Cross Origin Resource Sharing
 const cors = require('cors')
 
 // access keys
@@ -21,6 +24,7 @@ app.use(cors({
 
 // Routes
 app.use('/api/football',ecommRoutes)
+app.use('/api/cart',shoppingCartRoutes)
 
 
 // Connect to db and server

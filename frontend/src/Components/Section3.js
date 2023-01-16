@@ -1,8 +1,9 @@
 import { useEffect, useState} from 'react'
 
-import { NikeImage1 } from '../Assets/NikeImageImports'
-import { PumaImage1 } from '../Assets/PumaImageImports'
-import { AdidasImage1 } from '../Assets/AdidasImageImports'
+import Adidas from '../images/Adidas/Adidas'
+import Nike from '../images/Nike/Nike'
+import Puma from '../images/Puma/Puma'
+
 
 
 const Section3 = () => {
@@ -25,10 +26,11 @@ const Section3 = () => {
 
   }, [])
 
-  const checkImage = (path) => {
-    if(path.includes("Nike")) return NikeImage1;
-    else if (path.includes("Adidas")) return AdidasImage1;
-    else return PumaImage1;
+  function imageFinder(path){
+
+    if(path.includes('nike')){return Nike[path]}
+    else if(path.includes('adidas')){return Adidas[path]}
+    else if(path.includes('puma')){return Puma[path]}
   }
 
 
@@ -47,7 +49,7 @@ const Section3 = () => {
           
             <div className="flex flex-col items-center border-2 shadow-xl hover:scale-110 duration-300 rounded-2xl h-auto text-center w-28 sm:w-56">
 
-              <img src={checkImage(filteredItems.path)} alt="Cleats" className="rounded-2x md:w-[18rem] cursor-pointer w-24 sm:w-[24rem]"/>
+              <img src={imageFinder(filteredItems.path)} alt="Cleats" className="rounded-2x md:w-[18rem] cursor-pointer w-24 sm:w-[24rem]"/>
 
               <h2 className="text-xs w-24 md:text-base md:w-3/4 sm:text-sm mt-2">{ filteredItems.name }</h2>
               <h3 className='text-xs sm:text-sm'>{ filteredItems.price }</h3>

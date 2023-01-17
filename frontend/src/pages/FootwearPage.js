@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import NavBar from "../Components/Navbar";
 import { useState, useEffect } from 'react'
 
@@ -12,7 +14,7 @@ import Puma from '../images/Puma/Puma'
 const FootwearPage = () => {
 
   const [inventory, setInventory] = useState(null)
-  const [filterItems, setFilterItems] = useState(null)
+  
 
   const fetchInventory = async () => {
 
@@ -70,7 +72,8 @@ const FootwearPage = () => {
 
         {inventory && inventory.filter(item => item.category === 'Footwear').map(items => (
 
-          <div key={items._id} className="mt-12 w-64 h-96 border-2 rounded-2xl hover:scale-110 transition duration-500 cursor-pointer">
+          <Link to={`/${items._id}`}>
+          <div key={items._id} className="mt-12 w-64 h-96 border-2 rounded-2xl hover:scale-110 transition duration-500 cursor-pointer" >
 
             <img src={imageFinder(items.path)} alt="Footwear" className="rounded-t-2xl"/>
             <h3>{ items.brand }</h3>
@@ -78,6 +81,8 @@ const FootwearPage = () => {
             <h3>{ `$${items.price}` }</h3>
 
           </div>
+          </Link>
+
 
         ))}
 

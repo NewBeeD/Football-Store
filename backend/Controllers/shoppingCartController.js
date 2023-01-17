@@ -30,10 +30,10 @@ const getSingleItem = async (req, res) => {
 // Add inventory
 const addInventory = async (req, res) => {
 
-  const {item} = req.body
+  const {item, size} = req.body
 
   try{
-    const schema = await shoppingCartSchema.create({item})
+    const schema = await shoppingCartSchema.create({item, size})
     res.status(200).json(schema)
   }
   catch(error){

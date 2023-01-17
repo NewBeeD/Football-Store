@@ -6,6 +6,10 @@ const shoppingCartSchema = new Schema({
 
   item:{
     type: Object
+  },
+  size:{
+    type: Number, 
+    required: true
   }
 
 })

@@ -77,19 +77,17 @@ const Cart = () => {
 
     <NavBar />
 
-    <div className="mt-16 font-barlow w-80 pl-4">
+    <div className="mt-16 font-barlow pl-4">
       <h2 className="font-extrabold text-2xl">YOUR BAG</h2>
-      <h4 className="mt-2 text-lg">Items in your bag are not reserved — check out now to make them yours.</h4>
+      <h4 className="mt-2 w-96 md:w-[80rem] text-lg">Items in your bag are not reserved — check out now to make them yours.</h4>
     </div>
 
-    <div>{width}</div>
-
     {/* Section containing both Items and Cart Total */}
-    <section className='mt-12 flex flex-col items-center md:flex-row border-2'>
+    <section className='mt-12 flex flex-col items-center md:flex-row md:justify-evenly'>
 
       {/* This div encapsulates the Items */}
           
-      <div className={`${(width > 375 && width < 640)? 'max-w-[23rem]':''} flex flex-col items-center md:max-w-[40ch]  space-y-4 border-2`}>
+      <div className={`${(width > 375 && width < 640)? 'max-w-[23rem]':''} flex flex-col items-center md:max-w-[40ch] space-y-4 border-2`}>
 
         {inventory && inventory.map(items => (
           
@@ -130,7 +128,7 @@ const Cart = () => {
       {/* Order Summary Containment */}
       <div className='flex flex-col items-center mt-8 border-2'>
 
-        <div className="md:w-[50%] border-2 border-slate-400 shadow-md space-y-2 rounded-lg p-4">
+        <div className="md:w-full border-2 border-slate-400 shadow-md space-y-2 rounded-lg p-4">
             <h2 className="mb-8 text-3xl font-bold">Order Summary</h2>
 
             <div className="flex flex-row justify-between">

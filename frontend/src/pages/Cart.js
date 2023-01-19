@@ -1,8 +1,75 @@
+import Nike from '../images/Nike/Nike'
+import Adidas from '../images/Adidas/Adidas'
+import Puma from '../images/Puma/Puma'
+
+import {AiFillDelete} from 'react-icons/ai'
+
+import { useState, useEffect, useRef } from "react";
+
 import NavBar from "../Components/Navbar";
 
 
 
 const Cart = () => {
+
+
+  const [inventory, setInventory] = useState(null)
+  
+
+  const fetchInventory = async () => {
+
+     
+    await fetch('http://localhost:5000/api/cart')
+    .then((response) => response.json())
+    .then((json) => setInventory(json.inventory))
+    .catch(err => err.message)
+}
+  
+  useEffect(() => {
+
+    fetchInventory()
+        
+  }, [])
+
+
+  function imageFinder(path){
+
+    if(path.includes('nike')){return Nike[path]}
+    else if(path.includes('adidas')){return Adidas[path]}
+    else if(path.includes('puma')){return Puma[path]}
+  }
+
+  const [windowDimension, setWindowDimension] = useState({winWidth: window.innerWidth, winHeight: window.innerHeight});
+
+  const detectWH = () => {
+    setWindowDimension({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight
+    })
+  }
+
+  useEffect(() => {
+
+    window.addEventListener('resize', detectWH)
+    return () => {window.removeEventListener('resize', detectWH)}
+  }, [])
+
+  const width = windowDimension.winWidth;
+
+
+
+
+  // function totalCost(prices){
+
+  //   for(let i=0; i<prices.length; i++){
+
+  //     console.log(prices[i])
+  //     cost = cost + total[i]
+  //   }
+
+  //   return cost;
+  // }
+
 
   return ( 
 
@@ -10,99 +77,109 @@ const Cart = () => {
 
     <NavBar />
 
-      <div className="mt-12 p-0 box-border font-Gemunu bg-primary2 flex flex-col m-auto 2xl:max-w-[100rem] 2xl:bg-white">
+    <div className="mt-16 font-barlow w-80 pl-4">
+      <h2 className="font-extrabold text-2xl">YOUR BAG</h2>
+      <h4 className="mt-2 text-lg">Items in your bag are not reserved — check out now to make them yours.</h4>
+    </div>
 
+    <div>{width}</div>
 
+    {/* Section containing both Items and Cart Total */}
+    <section className='mt-12 flex flex-col items-center md:flex-row border-2'>
 
-          <section className="flex flex-row justify-between mt-12 mb-8">
-
-            <div className="w-[50%] h-full pl-8">
-
-              <h2 className="text-4xl font-bold">YOUR BAG</h2>
-
-              <h4 className="text-xl">Items in your bag are not reserved — check out now to make them yours.</h4>
-
-              <div className="space-y-2 mt-8">
-
-  
-
-                <div>
-
-                  <div>
-                    <div>Name</div>
-                    <div>
-                      <div>Price</div>
-                      <div>X</div>
-                    </div>
-                    
-                    <div>Color</div>
+      {/* This div encapsulates the Items */}
           
-                    <div>Size</div>
-                  </div>
+      <div className={`${(width > 375 && width < 640)? 'max-w-[23rem]':''} flex flex-col items-center md:max-w-[40ch]  space-y-4 border-2`}>
 
-                  <select name="" id="" className="w-16 p-4">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
-                    <option value="">6</option>
-                  </select>
+        {inventory && inventory.map(items => (
+          
+          <div className={`max-w-[50ch] border-2 border-black rounded-2xl`}>
 
-                </div>
-
-              </div>
-
-
-
+            <div>
+              <img src={imageFinder(items.item[0].path)} alt="" className='rounded-t-2xl'/>
             </div>
 
-            <div className="w-[50%] h-auto flex flex-col items-center">
+            <div className='my-4 pl-2 font-bold'>
+              <h2>{items.item[0].name}</h2>
+              <h2>${items.item[0].price}</h2>
+              <h2>Size: {items.size}</h2>
+            </div>
 
-              <div className="w-[50%] mt-24 border-2 border-slate-400 shadow-md space-y-2 p-4 rounded-lg">
-                <h2 className="mb-8 text-3xl font-bold">Order Summary</h2>
-
-                <div className="flex flex-row justify-between">
-                  <div>Original Price</div>
-                  <div>$--</div>
-                </div>
-
-                <div className="flex flex-row justify-between">
-                  <div>Sale</div>
-                  <div>-$--</div>
-                </div>
-
-                <div className="flex flex-row justify-between">
-                  <div>2 Items</div>
-                  <div>$--</div>
-                </div>
-
-                <div className="flex flex-row justify-between">
-                  <div>Delivery</div>
-                  <div>Free</div>
-                </div>
-
-                <div className="flex flex-row justify-between">
-                  <div>Slaes Tax</div>
-                  <div>$--</div>
-                </div>
-
-                <div className="flex flex-row justify-between text-2xl font-bold">
-                  <div>Total</div>
-                  <div>$--</div>
-                </div>
-
+            <div className='flex flex-row justify-between items-center'>
+              <div className='pl-2 pb-2'>
+                <select name="" id="" className="w-16 p-2 border-2">
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                  <option value="">5</option>
+                  <option value="">6</option>
+                </select>
               </div>
 
-              
-
-              <button className="mt-4 text-2xl text-white font-bold bg-black tracking-wider border-2 border-white w-48 rounded-lg hover:text-red-900 hover:scale-110 transition duration-500 ease-in-out">CHECK OUT</button>
+              <div className='pr-4'>
+                <AiFillDelete className='text-red-900 hover:scale-125 cursor-pointer transition duration-500 scale-150'/>
+              </div>
             </div>
-          </section>
 
-
+          </div>                  
+        ))}
 
       </div>
+
+      {/* Order Summary Containment */}
+      <div className='flex flex-col items-center mt-8 border-2'>
+
+        <div className="md:w-[50%] border-2 border-slate-400 shadow-md space-y-2 rounded-lg p-4">
+            <h2 className="mb-8 text-3xl font-bold">Order Summary</h2>
+
+            <div className="flex flex-row justify-between">
+              <div>Original Cost</div>
+              <div>$</div>
+            </div>
+
+            <div className="flex flex-row justify-between">
+              <div>Sale</div>
+              <div>-$--</div>
+            </div>
+
+            <div className="flex flex-row justify-between">
+              <div>2 Items</div>
+              <div>$--</div>
+            </div>
+
+
+            <div className="flex flex-row justify-between">
+              <div>Delivery</div>
+              <div>Free</div>
+            </div>
+
+            <div className="flex flex-row justify-between">
+              <div>Sales Tax</div>
+              <div>$--</div>
+            </div>
+
+            <div className="flex flex-row justify-between text-2xl font-bold">
+              <div>Total</div>
+              <div>$--</div>
+            </div>
+
+          </div>
+
+        <div>
+          <button className="mt-2 mb-8 text-2xl text-white font-bold bg-black tracking-wider border-2 border-white w-48 rounded-lg hover:text-red-900 hover:scale-110 transition duration-500 ease-in-out">CHECK OUT</button>
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    
 
 
     

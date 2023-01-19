@@ -13,7 +13,7 @@ const Item = () => {
   const {id} = useParams()
 
   const [inventory, setInventory] = useState(null)
-  const [shoeSize, setShoeSize] = useState(null)
+  const [size, setSize] = useState(null)
   const [error, setError] = useState(null)
   
   
@@ -65,13 +65,12 @@ const Item = () => {
 
 
     const item = inventory.filter(item => item._id === id);
-    const cartItem = {item, shoeSize}
+    const cartItems = {item, size}
 
-    console.log(cartItem);
 
-    const response = await fetch(url , {
+    const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(cartItem),
+      body: JSON.stringify(cartItems),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -85,7 +84,7 @@ const Item = () => {
 
     }
     if(response.ok){
-      setShoeSize(null)
+      setSize(null)
       setError(null)
       console.log('New Item Added');
     }
@@ -93,7 +92,7 @@ const Item = () => {
 
   function addShoeSize(e){
 
-    setShoeSize(Number(e.target.textContent));
+    setSize(Number(e.target.textContent));
     e.target.focus()
   }
 

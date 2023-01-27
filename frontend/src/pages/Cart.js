@@ -7,6 +7,7 @@ import {AiFillDelete} from 'react-icons/ai'
 import { useState, useEffect, useRef } from "react";
 
 import NavBar from "../Components/Navbar";
+import Footer from '../Components/Footer'
 
 
 
@@ -14,22 +15,38 @@ const Cart = () => {
 
 
   const [inventory, setInventory] = useState(null)
+  const [totalCost, setTotalCost] = useState(null);
   
 
   const fetchInventory = async () => {
 
-     
     await fetch('http://localhost:5000/api/cart')
     .then((response) => response.json())
-    .then((json) => setInventory(json.inventory))
+    .then((json) =>setInventory(json.inventory)) 
     .catch(err => err.message)
 }
+
+  const calcTotalCost = () => {
+
+    setTotalCost(inventory.map(items => items.item[0].price).reduce((accu, item) => accu + item))
+    console.log(totalCost);
+  }
+   
+
   
   useEffect(() => {
 
     fetchInventory()
-        
+    
   }, [])
+
+
+
+  useEffect(()=> {
+
+    calcTotalCost()
+  
+  }, [inventory])
 
 
   function imageFinder(path){
@@ -56,21 +73,6 @@ const Cart = () => {
 
   const width = windowDimension.winWidth;
 
-
-
-
-  // function totalCost(prices){
-
-  //   for(let i=0; i<prices.length; i++){
-
-  //     console.log(prices[i])
-  //     cost = cost + total[i]
-  //   }
-
-  //   return cost;
-  // }
-
-
   return ( 
 
     <>
@@ -83,11 +85,11 @@ const Cart = () => {
     </div>
 
     {/* Section containing both Items and Cart Total */}
-    <section className='mt-12 flex flex-col items-center md:flex-row md:justify-evenly'>
+    <section className='mt-12 flex flex-col items-center md:flex-row md:justify-evenly mb-24 md:max-w-[80rem] md:m-auto'>
 
       {/* This div encapsulates the Items */}
           
-      <div className={`${(width > 375 && width < 640)? 'max-w-[23rem]':''} flex flex-col items-center md:max-w-[40ch] space-y-4 border-2`}>
+      <div className={`${(width > 375 && width < 640)? 'max-w-[23rem]':''} flex flex-col items-center md:max-w-[40ch] space-y-4`}>
 
         {inventory && inventory.map(items => (
           
@@ -116,7 +118,7 @@ const Cart = () => {
               </div>
 
               <div className='pr-4'>
-                <AiFillDelete className='text-red-900 hover:scale-125 cursor-pointer transition duration-500 scale-150'/>
+                <AiFillDelete className='text-red-900 hover:scale-[1.7] cursor-pointer transition duration-500 scale-[1.5]'/>
               </div>
             </div>
 
@@ -126,7 +128,8 @@ const Cart = () => {
       </div>
 
       {/* Order Summary Containment */}
-      <div className='flex flex-col items-center mt-8 border-2'>
+      <div className='flex flex-col items-center mt-8'>
+
 
         <div className="md:w-full border-2 border-slate-400 shadow-md space-y-2 rounded-lg p-4">
             <h2 className="mb-8 text-3xl font-bold">Order Summary</h2>
@@ -173,14 +176,8 @@ const Cart = () => {
 
     </section>
 
+    <Footer />
 
-
-
-
-    
-
-
-    
     </>
 
 

@@ -25,11 +25,7 @@ const Cart = () => {
     .catch(err => err.message)
 }
   
-  useEffect(() => {
-
-    fetchInventory()
-        
-  }, [])
+  useEffect(() => { fetchInventory() }, [])
 
 
   function imageFinder(path){

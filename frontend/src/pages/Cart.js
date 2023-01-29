@@ -65,6 +65,19 @@ const Cart = () => {
 
   const width = windowDimension.winWidth;
 
+  const removeItem = async (id) => {
+
+    console.log(id);
+
+    const response = await fetch('http://localhost:5000/api/cart/' + id, {
+      method: 'DELETE'
+    })
+
+    // const json = await response.json()
+  }
+
+  
+
   return ( 
 
     <>
@@ -99,7 +112,7 @@ const Cart = () => {
 
             <div className='flex flex-row justify-between items-center'>
               <div className='pl-2 pb-2'>
-                <select name="" id="" className="w-16 p-2 border-2">
+                <select className="w-16 p-2 border-2">
                   <option value="">1</option>
                   <option value="">2</option>
                   <option value="">3</option>
@@ -110,7 +123,7 @@ const Cart = () => {
               </div>
 
               <div className='pr-4'>
-                <AiFillDelete className='text-red-900 hover:scale-[1.7] cursor-pointer transition duration-500 scale-[1.5]'/>
+                <AiFillDelete className='text-red-900 hover:scale-[1.7] cursor-pointer transition duration-500 scale-[1.5]' onClick={() => removeItem(items._id)}/>
               </div>
             </div>
 

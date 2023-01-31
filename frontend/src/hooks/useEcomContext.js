@@ -1,5 +1,4 @@
 import { EcommContext } from "../context/EcommContext";
-
 import { useContext } from "react";
 
 export const useEcomContext = () =>{

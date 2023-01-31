@@ -13,7 +13,7 @@ root.render(
 
     <BrowserRouter>
       <EcomContextProvider>
-      <App />
+        <App />
       </EcomContextProvider>
     </BrowserRouter>
 

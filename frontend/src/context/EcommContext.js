@@ -1,10 +1,15 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer } from "react"
 
 export const EcommContext = createContext()
 
 export const ecomReducer = (state, action) => {
 
   switch(action.type){
+
+    case 'DISPLAY_ITEMS':
+      return {
+        items: action.payload
+      }
 
     case 'ADD_ITEM':
       return { items: [action.payload, ...state.items]}

@@ -5,6 +5,7 @@ import Puma from '../images/Puma/Puma'
 import {AiFillDelete} from 'react-icons/ai'
 
 import { useState, useEffect, useRef } from "react";
+import { useEcomContext } from '../hooks/useEcomContext';
 
 import NavBar from "../Components/Navbar";
 import Footer from '../Components/Footer'
@@ -13,8 +14,8 @@ import Footer from '../Components/Footer'
 
 const Cart = () => {
 
-
-  const [inventory, setInventory] = useState(null)
+  const {inventory, dispatch} = useEcomContext()
+  // const [inventory, setInventory] = useState(null)
   const [totalCost, setTotalCost] = useState(null);
   
 
@@ -22,7 +23,11 @@ const Cart = () => {
 
     await fetch('http://localhost:5000/api/cart')
     .then((response) => response.json())
-    .then((json) =>setInventory(json.inventory)) 
+    .then((json) =>{
+
+      console.log(json);
+      dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
+    }) 
     .catch(err => err.message)
 }
 
@@ -73,7 +78,16 @@ const Cart = () => {
       method: 'DELETE'
     })
 
-    // const json = await response.json()
+    const json = await response.json()
+
+    // console.log(json.inventory);
+
+    if(response.ok){
+
+      console.log('Response Was Ok');
+
+      dispatch({type: 'DELETE_ITEM', payload: json.inventory})
+    }
   }
 
   
@@ -98,7 +112,7 @@ const Cart = () => {
 
         {inventory && inventory.map(items => (
           
-          <div className={`max-w-[50ch] border-2 border-black rounded-2xl`}>
+          <div className={`max-w-[50ch] border-2 border-black rounded-2xl`} key={items._id}>
 
             <div>
               <img src={imageFinder(items.item[0].path)} alt="" className='rounded-t-2xl'/>

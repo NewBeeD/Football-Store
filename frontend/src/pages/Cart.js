@@ -25,7 +25,6 @@ const Cart = () => {
     .then((response) => response.json())
     .then((json) =>{
 
-      console.log(json);
       dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
     }) 
     .catch(err => err.message)
@@ -72,15 +71,12 @@ const Cart = () => {
 
   const removeItem = async (id) => {
 
-    console.log(id);
-
     const response = await fetch('http://localhost:5000/api/cart/' + id, {
       method: 'DELETE'
     })
 
     const json = await response.json()
 
-    // console.log(json.inventory);
 
     if(response.ok){
 

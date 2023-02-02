@@ -4,8 +4,9 @@ export const EcommContext = createContext()
 
 export const ecomReducer = (state, action) => {
 
-  console.log('State',state);
-  console.log('Payload',action.payload);
+  console.log('State: ', state);
+  console.log('Payload: ', action.payload);
+
 
   switch(action.type){
 

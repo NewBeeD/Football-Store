@@ -4,7 +4,7 @@ import Puma from '../images/Puma/Puma'
 
 import {AiFillDelete} from 'react-icons/ai'
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 import { useEcomContext } from '../hooks/useEcomContext';
 
 import NavBar from "../Components/Navbar";
@@ -71,20 +71,17 @@ const Cart = () => {
 
   const removeItem = async (id) => {
 
-    const response = await fetch('http://localhost:5000/api/cart/' + id, {
+    await fetch('http://localhost:5000/api/cart/' + id, {
       method: 'DELETE'
     })
-
-    const json = await response.json()
-
-
-    if(response.ok){
-
-      console.log('Response Was Ok');
-
+    .then((res) => { res.json()})
+    .then((json) => { 
+      console.log('Inside the Json File');
       dispatch({type: 'DELETE_ITEM', payload: json.inventory})
-    }
+      })
+    .catch(err=> err.message)
   }
+
 
   
 

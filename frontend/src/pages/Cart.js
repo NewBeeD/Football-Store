@@ -14,8 +14,8 @@ import Footer from '../Components/Footer'
 
 const Cart = () => {
 
-  const {inventory, dispatch} = useEcomContext()
-  // const [inventory, setInventory] = useState(null)
+  // const {inventory, dispatch} = useEcomContext()
+  const [inventory, setInventory] = useState(null)
   const [totalCost, setTotalCost] = useState(null);
   
 
@@ -25,7 +25,9 @@ const Cart = () => {
     .then((response) => response.json())
     .then((json) =>{
 
-      dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
+      setInventory(json.inventory)
+
+      // dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
     }) 
     .catch(err => err.message)
 }
@@ -74,16 +76,9 @@ const Cart = () => {
     await fetch('http://localhost:5000/api/cart/' + id, {
       method: 'DELETE'
     })
-    .then((res) => { res.json()})
-    .then((json) => { 
-      console.log('Inside the Json File');
-      dispatch({type: 'DELETE_ITEM', payload: json.inventory})
-      })
+    .then(fetchInventory())
     .catch(err=> err.message)
   }
-
-
-  
 
   return ( 
 

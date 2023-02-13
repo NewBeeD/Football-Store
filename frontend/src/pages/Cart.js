@@ -23,28 +23,26 @@ const Cart = () => {
 
     await fetch('http://localhost:5000/api/cart')
     .then((response) => response.json())
-    .then((json) =>{
-
-      setInventory(json.inventory)
-
-      // dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
-    }) 
+    .then((json) =>{ setInventory(json.inventory)}) 
     .catch(err => err.message)
 }
 
-  const calcTotalCost = () => {
+  const calcTotalCost = async () => {
 
     setTotalCost(inventory.map(items => items.item[0].price).reduce((accu, item) => accu + item))
-    console.log(totalCost);
   }
-   
 
-  
   useEffect(() => {
 
     fetchInventory()
         
   }, [])
+
+  useEffect(() => {
+
+    calcTotalCost()
+
+  }, [inventory])
 
 
   function imageFinder(path){
@@ -143,17 +141,17 @@ const Cart = () => {
 
             <div className="flex flex-row justify-between">
               <div>Original Cost</div>
-              <div>$</div>
+              <div>{totalCost ? `$${totalCost}` : '$0'}</div>
             </div>
 
             <div className="flex flex-row justify-between">
               <div>Sale</div>
-              <div>-$--</div>
+              <div>$0</div>
             </div>
 
             <div className="flex flex-row justify-between">
               <div>2 Items</div>
-              <div>$--</div>
+              <div>$0</div>
             </div>
 
 
@@ -164,12 +162,12 @@ const Cart = () => {
 
             <div className="flex flex-row justify-between">
               <div>Sales Tax</div>
-              <div>$--</div>
+              <div>$0</div>
             </div>
 
             <div className="flex flex-row justify-between text-2xl font-bold">
               <div>Total</div>
-              <div>$--</div>
+              <div>{totalCost ? `$${totalCost}` : '$0'}</div>
             </div>
 
           </div>

@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 // Routes
 const ecommRoutes = require('./Routes/ecommerceRoutes')
 const shoppingCartRoutes = require('./Routes/shoppingCartRoutes')
+const userRoutes = require('./Routes/user')
 // Cross Origin Resource Sharing
 const cors = require('cors')
 
@@ -25,6 +26,7 @@ app.use(cors({
 // Routes
 app.use('/api/football',ecommRoutes)
 app.use('/api/cart',shoppingCartRoutes)
+app.use('/api/user',userRoutes)
 
 
 // Connect to db and server

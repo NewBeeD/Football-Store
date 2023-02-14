@@ -14,8 +14,8 @@ import Footer from '../Components/Footer'
 
 const Cart = () => {
 
-  // const {inventory, dispatch} = useEcomContext()
-  const [inventory, setInventory] = useState(null)
+  const {inventory, dispatch} = useEcomContext()
+  // const [inventory, setInventory] = useState(null)
   const [totalCost, setTotalCost] = useState(null);
   
 
@@ -23,28 +23,33 @@ const Cart = () => {
 
     await fetch('http://localhost:5000/api/cart')
     .then((response) => response.json())
-    .then((json) =>{
-
-      setInventory(json.inventory)
-
-      // dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
+    .then((json) =>{ 
+      dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
     }) 
     .catch(err => err.message)
 }
 
-  const calcTotalCost = () => {
+  const calcTotalCost = async () => {
 
-    setTotalCost(inventory.map(items => items.item[0].price).reduce((accu, item) => accu + item))
-    console.log(totalCost);
+    if(inventory){
+      setTotalCost(inventory.map(items => items.item[0].price).reduce((accu, item) => accu + item))
+
+    }
+
+    
   }
-   
 
-  
+
   useEffect(() => {
 
-    fetchInventory()
-        
+    fetchInventory()        
   }, [])
+
+  useEffect(() => {
+
+    calcTotalCost()
+
+  }, [inventory])
 
 
   function imageFinder(path){
@@ -73,11 +78,31 @@ const Cart = () => {
 
   const removeItem = async (id) => {
 
-    await fetch('http://localhost:5000/api/cart/' + id, {
+
+    const response = await fetch('http://localhost:5000/api/cart/' + id, {
       method: 'DELETE'
     })
-    .then(fetchInventory())
-    .catch(err=> err.message)
+
+    const json = await response.json()
+
+    if(response.ok){
+
+      dispatch({type: 'DELETE_ITEM', payload: json})
+    }
+
+    // console.log(json().inventory);
+
+    // await fetch('http://localhost:5000/api/cart/' + id, {
+    //   method: 'DELETE'
+    // })    
+    // .then((response) => response.json())
+    // .then((json) =>{ 
+
+    //   console.log(json.inventory);
+     
+    //   // dispatch({type: 'DELETE_ITEM', payload: json.inventory})
+    // })
+    // .catch(err=> err.message)
   }
 
   return ( 
@@ -143,17 +168,17 @@ const Cart = () => {
 
             <div className="flex flex-row justify-between">
               <div>Original Cost</div>
-              <div>$</div>
+              <div>{totalCost ? `$${totalCost}` : '$0'}</div>
             </div>
 
             <div className="flex flex-row justify-between">
               <div>Sale</div>
-              <div>-$--</div>
+              <div>$0</div>
             </div>
 
             <div className="flex flex-row justify-between">
               <div>2 Items</div>
-              <div>$--</div>
+              <div>$0</div>
             </div>
 
 
@@ -164,12 +189,12 @@ const Cart = () => {
 
             <div className="flex flex-row justify-between">
               <div>Sales Tax</div>
-              <div>$--</div>
+              <div>$0</div>
             </div>
 
             <div className="flex flex-row justify-between text-2xl font-bold">
               <div>Total</div>
-              <div>$--</div>
+              <div>{totalCost ? `$${totalCost}` : '$0'}</div>
             </div>
 
           </div>

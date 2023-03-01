@@ -1,8 +1,12 @@
 
 const {addInventory, getSingleInventory, getAllInventory, deleteInventory, updateInventory} = require('../Controllers/ecommController')
 const express = require('express')
+const requireAuth = require('../middleware/requireAuth')
+
+
 const router = express.Router()
 
+// router.use(requireAuth)
 
 
 // Get all data

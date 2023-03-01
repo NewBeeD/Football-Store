@@ -1,6 +1,7 @@
 import Nike from '../images/Nike/Nike'
 import Adidas from '../images/Adidas/Adidas'
 import Puma from '../images/Puma/Puma'
+import { useAuthContext } from "../hooks/useAuthContext";
 
 import {AiFillDelete} from 'react-icons/ai'
 
@@ -14,16 +15,23 @@ import Footer from '../Components/Footer'
 
 const Cart = () => {
 
-  // const {inventory, dispatch} = useEcomContext()
-  const [inventory, setInventory] = useState(null)
+  const {inventory, dispatch} = useEcomContext()
+  // const [inventory, setInventory] = useState(null)
   const [totalCost, setTotalCost] = useState(null);
+  const {user} = useAuthContext()
   
 
   const fetchInventory = async () => {
 
-    await fetch('http://localhost:5000/api/cart')
+    await fetch('http://localhost:5000/api/cart', {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
     .then((response) => response.json())
-    .then((json) =>{ setInventory(json.inventory)}) 
+    .then((json) =>{ 
+      dispatch({type: 'DISPLAY_ITEMS', payload: json.inventory})
+    }) 
     .catch(err => err.message)
 }
 
@@ -34,9 +42,9 @@ const Cart = () => {
 
   useEffect(() => {
 
-    fetchInventory()
-        
-  }, [])
+    if(user){fetchInventory()}
+    
+    }, [])
 
   useEffect(() => {
 
@@ -71,11 +79,30 @@ const Cart = () => {
 
   const removeItem = async (id) => {
 
-    await fetch('http://localhost:5000/api/cart/' + id, {
+    const response = await fetch('http://localhost:5000/api/cart/' + id, {
       method: 'DELETE'
     })
-    .then(fetchInventory())
-    .catch(err=> err.message)
+
+    const json = await response.json()
+
+    if(response.ok){
+
+      dispatch({type: 'DELETE_ITEM', payload: json})
+    }
+
+    // console.log(json().inventory);
+
+    // await fetch('http://localhost:5000/api/cart/' + id, {
+    //   method: 'DELETE'
+    // })    
+    // .then((response) => response.json())
+    // .then((json) =>{ 
+
+    //   console.log(json.inventory);
+     
+    //   // dispatch({type: 'DELETE_ITEM', payload: json.inventory})
+    // })
+    // .catch(err=> err.message)
   }
 
   return ( 

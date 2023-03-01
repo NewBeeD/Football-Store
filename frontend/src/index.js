@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { EcomContextProvider } from './context/EcommContext'; 
+import { AuthContextProvider } from './context/AuthContext'; 
 
 
 
@@ -12,9 +13,11 @@ root.render(
   <React.StrictMode>
 
     <BrowserRouter>
-      <EcomContextProvider>
-        <App />
-      </EcomContextProvider>
+      <AuthContextProvider>
+        <EcomContextProvider>
+          <App />
+        </EcomContextProvider>
+      </AuthContextProvider>
     </BrowserRouter>
 
   </React.StrictMode>

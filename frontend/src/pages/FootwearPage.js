@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import NavBar from "../Components/Navbar";
 import { useState, useEffect } from 'react'
+// import { useAuthContext } from "../hooks/useAuthContext";
 
 import Adidas from '../images/Adidas/Adidas'
 import Nike from '../images/Nike/Nike'
@@ -14,6 +15,7 @@ import Puma from '../images/Puma/Puma'
 const FootwearPage = () => {
 
   const [inventory, setInventory] = useState(null)
+  // const {user} = useAuthContext()
   
 
   const fetchInventory = async () => {

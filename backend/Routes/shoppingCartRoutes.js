@@ -1,8 +1,13 @@
 
 const {getAllItems, getSingleItem, addInventory, deleteInventory, updateInventory} = require('../Controllers/shoppingCartController')
 const express = require('express')
+const requireAuth = require('../middleware/requireAuth')
+
 const router = express.Router()
 
+
+// Require Authentication for all routes
+router.use(requireAuth)
 
 
 // Get all data

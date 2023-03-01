@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
+import { useAuthContext } from "../hooks/useAuthContext";
 
 import Adidas from '../images/Adidas/Adidas'
 import Nike from '../images/Nike/Nike'
@@ -15,6 +16,7 @@ const Item = () => {
   const [inventory, setInventory] = useState(null)
   const [size, setSize] = useState(null)
   const [error, setError] = useState(null)
+  const {user} = useAuthContext()
   
   
   const [windowDimension, setWindowDimension] = useState({winWidth: window.innerWidth, winHeight: window.innerHeight});

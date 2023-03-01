@@ -4,13 +4,19 @@ import { CiCircleList} from 'react-icons/ci';
 import { BsSearch} from 'react-icons/bs';
 import { GrClose} from 'react-icons/gr';
 import { useEffect, useState } from 'react';
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 import { Link } from 'react-router-dom'
+
+
 
 
 const NavBar = () => {
 
   const [menuToggle, setMenuToggle] = useState(false)
+  const {logout} = useLogout()
+  const {user} = useAuthContext()
 
 
   const screen = window.innerWidth;
@@ -18,6 +24,12 @@ const NavBar = () => {
   const openMenu = event => {
 
     setMenuToggle(!menuToggle)
+  }
+
+
+  const handleClick = () => {
+
+    logout()
   }
 
 
@@ -53,8 +65,9 @@ const NavBar = () => {
           <div>
             
             <ul className={`flex flex-col mt-8 -ml-6 space-y-2`}>
-                <li>SIGN-UP</li>
-                <li>LOG-IN</li>
+                <li><Link to='/signup'>SIGN UP</Link></li>
+                <li><Link to='/login'>LOG-IN</Link></li>
+                <li onClick={handleClick} >LOG-OUT</li>
             </ul>
 
           </div>
@@ -88,8 +101,18 @@ const NavBar = () => {
         <div className={`flex space-x-2`}>
             <ul className={`md:flex md:items-center md:space-x-2 hidden`}>
 
+              {!user && 
+              <>
               <li className='cursor-pointer hover:text-white'><Link to='/signup'>SIGN UP</Link></li> 
               <li className='cursor-pointer hover:text-white'><Link to='/login'>LOG-IN</Link></li>
+              </>}
+
+
+              {user && (
+              <>
+              <li>{user.email}</li>
+              <li className='cursor-pointer hover:text-white border-2 border-yellow-400 p-1 text-red-300' onClick={handleClick}>LOG-OUT</li>
+              </>)}
             </ul>
 
             <div className={`flex space-x-7 justify-center items-center`}>

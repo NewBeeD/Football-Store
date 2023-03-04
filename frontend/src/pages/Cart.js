@@ -33,10 +33,7 @@ const Cart = () => {
 
     if(inventory){
       setTotalCost(inventory.map(items => items.item[0].price).reduce((accu, item) => accu + item))
-
     }
-
-    
   }
 
 

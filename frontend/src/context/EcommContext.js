@@ -4,20 +4,12 @@ export const EcommContext = createContext()
 
 export const ecomReducer = (state, action) => {
 
-  // console.log('State', state.inventory);
-  // console.log('Payload', action.payload);
-
-
-
-  // if(state !== null){
-
-  //   data = state.inventory.map((item) => item._id !== action.payload._id)
-  //   console.log(data);
-  // }
-
+  // console.log(state.inventory);
 
 
   switch(action.type){
+
+    
 
     case 'DISPLAY_ITEMS':
       return { inventory: action.payload }
@@ -25,7 +17,7 @@ export const ecomReducer = (state, action) => {
     case 'DELETE_ITEM':
       return {
         inventory: state.inventory.filter((item) => item._id !== action.payload._id)
-      }
+      }      
     
     default:
       return state;

@@ -49,22 +49,26 @@ const FootwearPage = () => {
     
       if(brand === 'All'){
         setDisplayFilter(false)
-        setFilter(inventory.filter(item => item.brand !== 'none'))}
+        setFilter(inventory.filter(item => item.category === 'Footwear'))
+      }
 
       if(brand === 'Nike'){
         setDisplayFilter(true)
-        setFilter(inventory.filter(item => item.brand === 'Nike'))}
+        setFilter(inventory.filter(item => item.brand === 'Nike' && item.category === 'Footwear'))
+        console.log(filtered);}
 
       if(brand === 'Adidas'){
         setDisplayFilter(true)
-        setFilter(inventory.filter(item => item.brand === 'Adidas'))}
+        setFilter(inventory.filter(item => item.brand === 'Adidas' && item.category === 'Footwear'))
+        console.log(filtered);}
 
       if(brand === 'Puma'){
         setDisplayFilter(true)
-        setFilter(inventory.filter(item => item.brand === 'Puma'))}
+        setFilter(inventory.filter(item => item.brand === 'Puma' && item.category === 'Footwear'))
+        console.log(filtered);}
   }
 
-  if(filtered){
+  if(displayFilter){
 
     return ( 
     
